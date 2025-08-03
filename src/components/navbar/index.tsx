@@ -9,77 +9,61 @@ import {
   useScroll,
   useTransform,
 } from "motion/react";
+import { Menu, X } from "lucide-react";
 
 export const Navbar = () => {
   const navItems = [
-    {
-      title: "Home",
-      href: "/",
-    },
-    {
-      title: "About",
-      href: "/about",
-    },
-    {
-      title: "Projects",
-      href: "/projects",
-    },
-    {
-      title: "Blog",
-      href: "/blog",
-    },
-    {
-      title: "Contact",
-      href: "/contact",
-    },
+    { title: "About", href: "/about" },
+    { title: "Projects", href: "/projects" },
+    { title: "Blog", href: "/blog" },
+    { title: "Contact", href: "/contact" },
   ];
 
   const [hovered, setHovered] = useState<number | null>(null);
-  const [scrolled, setScrolled] = useState<boolean>(false);
-  const { scrollY } = useScroll();
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 100], [0, 10]);
-  const width = useTransform(scrollY, [0, 100], ["90%", ["50%"]]);
+  const width = useTransform(scrollY, [0, 100], ["90%", "50%"]);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 50) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
+    setScrolled(latest > 50);
   });
+
+  const toggleMenu = () => setMobileMenuOpen((prev) => !prev);
+
   return (
-    <Container className="relative z-10">
+    <Container className="relative z-50">
       <motion.nav
-        style={{
-          boxShadow: scrolled ? "var(--shadow-custom)" : "none",
-          backgroundColor: "white",
-          width: width,
-          y,
-        }}
-        transition={{
-          duration: 0.3,
-          ease: "linear",
-        }}
-        className="fixed inset-x-0 top-0 mx-auto flex max-w-4xl items-center justify-between rounded-full px-5 py-2"
+        style={{ width, y }}
+        transition={{ duration: 0.3, ease: "linear" }}
+        className={`fixed inset-x-0 top-0 mx-auto flex max-w-4xl items-center justify-between rounded-full px-5 py-2 transition-all duration-300 ${
+          scrolled
+            ? "bg-white/40 dark:bg-black/30 backdrop-blur-md shadow-md"
+            : ""
+        }`}
       >
-        <Link href={"/"}>
+        {/* Logo */}
+        <Link href="/">
           <Image
             className="h-10 w-10 rounded-full"
             src="/avatar.jpeg"
-            width="100"
-            height="100"
+            width={100}
+            height={100}
             alt="Avatar"
           />
         </Link>
-        <div className="flex items-center">
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-4">
           {navItems.map((item, idx) => (
             <Link
-              className="relative px-2 py-1 text-sm"
-              href={item.href}
               key={idx}
+              href={item.href}
               onMouseEnter={() => setHovered(idx)}
               onMouseLeave={() => setHovered(null)}
+              className="relative px-2 py-1 text-sm"
             >
               {hovered === idx && (
                 <motion.span
@@ -91,7 +75,31 @@ export const Navbar = () => {
             </Link>
           ))}
         </div>
+
+        {/* Mobile Menu Toggle */}
+        <button
+          className="md:hidden p-2 rounded-md z-50"
+          onClick={toggleMenu}
+        >
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </motion.nav>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-white/90 dark:bg-black/90 backdrop-blur-md md:hidden flex flex-col items-center justify-center gap-6">
+          {navItems.map((item, idx) => (
+            <Link
+              key={idx}
+              href={item.href}
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-xl font-medium"
+            >
+              {item.title}
+            </Link>
+          ))}
+        </div>
+      )}
     </Container>
   );
 };

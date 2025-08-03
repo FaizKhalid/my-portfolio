@@ -43,7 +43,7 @@ export const Testimonials = () => {
 
   return (
     <div className="py-10">
-      <SectionHeading className="pb-4" delay={0.8}>
+      <SectionHeading className="mb-4" delay={0.8}>
         People love my work
       </SectionHeading>
       <div className="flex mask-r-from-80% mask-l-from-80%">
@@ -72,7 +72,7 @@ const TestimonialCard = ({
 }) => {
   return (
     <div className="relative shadow-box mx-4 flex h-40 w-full max-w-60 flex-col gap-4 rounded-xl p-4">
-      <p className="text-sm text-neutral-700">{quote}</p>
+      <p className="text-sm text-neutral-500">{quote}</p>
       <div className="flex items-center gap-4 absolute bottom-0 pb-5 ">
         <img src={avatar} alt={name} className="size-4 rounded-full object-cover" />
         <p className="text-sm text-neutral-500">{name}</p>

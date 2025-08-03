@@ -4,6 +4,25 @@
 @custom-variant dark (&:is(.dark *));
 @plugin '@tailwindcss/typography';
 
+@layer utilities {
+  .glass-hover {
+    @apply transition-all duration-300;
+  }
+
+  .glass-hover:hover {
+    @apply backdrop-blur-md rounded-xl shadow-md border;
+    @apply bg-white/30 dark:bg-black/30;
+    @apply border-white/20 dark:border-white/5;
+  }
+
+  .glass{
+    @apply backdrop-blur-md rounded-xl shadow-md border;
+    @apply bg-white/30 dark:bg-black/30;
+    @apply border-white/20 dark:border-white/5;
+  }
+}
+
+
 @theme inline {
   --color-primary: var(--color-neutral-800);
   --color-secondary: var(--color-neutral-500);

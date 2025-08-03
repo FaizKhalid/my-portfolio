@@ -18,7 +18,7 @@ export default function TechStackPills() {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <div className="flex mt-2  items-center">
+    <div className="absolute bottom-2 flex items-center px-2">
       {techStack.map((tech, index) => (
         <div
           key={index}
@@ -44,7 +44,7 @@ export default function TechStackPills() {
               hovered === index
                 ? 'opacity-100'
                 : 'opacity-0'
-            } text-black dark:text-white`}
+            } text-secondary dark:text-white`}
           >
             {tech.name}
           </span>

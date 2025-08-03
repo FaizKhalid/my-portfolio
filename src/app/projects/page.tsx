@@ -9,7 +9,7 @@ import Image from "next/image";
 export default function Project() {
   return (
     <div className="min-h-screen items-center justify-items-center">
-      <Container className="min-h-[200vh] p-4 md:pt-20 md:pb-10">
+      <Container className="min-h-[200vh] p-4 pt-20 md:pb-10">
         <h1 className="text-primary text-2xl font-bold tracking-tight md:text-4xl">
           Projects
         </h1>

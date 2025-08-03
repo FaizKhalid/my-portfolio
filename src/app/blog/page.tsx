@@ -11,7 +11,7 @@ export default function BlogListPage() {
     str.length > length ? str.substring(0, length) + "..." : str;
 
   return (
-    <Container className="min-h-[200vh] p-8 md:pt-20 md:pb-10">
+    <Container className="min-h-[200vh] p-8 pt-20 md:pb-10">
       <Heading>All Blogs</Heading>
       <Subheading>
         Software developer passionate about building scalable systems.
