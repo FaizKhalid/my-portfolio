@@ -3,6 +3,7 @@ import { Heading } from "@/components/heading";
 import { LandingBlogs } from "@/components/landing-blogs";
 import { Projects } from "@/components/projects";
 import { Subheading } from "@/components/subheading";
+import TechStackHover from "@/components/tackstackhover";
 import { Testimonials } from "@/components/testimonials";
 import { projects } from "@/constant/projects";
 import Image from "next/image";

@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import Link from "next/link";
 import { Project } from "@/constant/projects";
 import { SectionHeading } from "./section-heading";
+import TechStackHover from "./tackstackhover";
 
 export const Projects = ({ projects }: { projects: Project[] }) => {
   return (
@@ -41,6 +42,7 @@ export const Projects = ({ projects }: { projects: Project[] }) => {
                 {project.description}
               </p>
             </Link>
+            <TechStackHover/>
           </motion.div>
         ))}
       </div>
